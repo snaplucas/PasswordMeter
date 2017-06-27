@@ -6,11 +6,11 @@ import port.adapter.specification.pattern.interfaces.ISpecification;
 public class Numeros implements ISpecification<Password> {
     @Override
     public boolean isSatisfiedBy(Password entity) {
-        return entity.numeros() > 0;
+        return entity.totalNumeros() > 0;
     }
 
     @Override
     public double calcularPontuacao(Password entity) {
-        return entity.numeros() * 4;
+        return entity.totalNumeros() * 4;
     }
 }

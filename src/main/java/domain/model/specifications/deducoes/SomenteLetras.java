@@ -6,11 +6,11 @@ import port.adapter.specification.pattern.interfaces.ISpecification;
 public class SomenteLetras implements ISpecification<Password> {
     @Override
     public boolean isSatisfiedBy(Password entity) {
-        return entity.numeros() == 0 && entity.simbolos() == 0;
+        return entity.totalLetras() == entity.totalCaracteres();
     }
 
     @Override
     public double calcularPontuacao(Password entity) {
-        return -(entity.totalCaracteres());
+        return -(entity.totalLetras());
     }
 }

@@ -7,11 +7,11 @@ public class LetrasMaiusculas implements ISpecification<Password> {
 
     @Override
     public boolean isSatisfiedBy(Password entity) {
-        return entity.letrasMaiusculas() > 0;
+        return entity.totalLetrasMaiusculas() > 0;
     }
 
     @Override
     public double calcularPontuacao(Password entity) {
-        return (entity.tamanhoTexto() - entity.letrasMaiusculas()) * 2;
+        return (entity.tamanhoTexto() - entity.totalLetrasMaiusculas()) * 2;
     }
 }

@@ -6,11 +6,11 @@ import port.adapter.specification.pattern.interfaces.ISpecification;
 public class LetrasMinusculas implements ISpecification<Password> {
     @Override
     public boolean isSatisfiedBy(Password entity) {
-        return entity.letrasMinusculas() > 0;
+        return entity.totalLetrasMinusculas() > 0;
     }
 
     @Override
     public double calcularPontuacao(Password entity) {
-        return (entity.tamanhoTexto() - entity.letrasMinusculas()) * 2;
+        return (entity.tamanhoTexto() - entity.totalLetrasMinusculas()) * 2;
     }
 }

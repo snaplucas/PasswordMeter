@@ -41,19 +41,23 @@ public class Password {
         return texto.toCharArray().length;
     }
 
-    public long letrasMaiusculas() {
+    public long totalLetras() {
+        return caracteres.stream().filter(Character::isAlphabetic).count();
+    }
+
+    public long totalLetrasMaiusculas() {
         return caracteres.stream().filter(Character::isUpperCase).count();
     }
 
-    public long letrasMinusculas() {
+    public long totalLetrasMinusculas() {
         return caracteres.stream().filter(Character::isLowerCase).count();
     }
 
-    public long numeros() {
+    public long totalNumeros() {
         return caracteres.stream().filter(Character::isDigit).count();
     }
 
-    public long simbolos() {
+    public long totalSimbolos() {
         return caracteres.stream().filter(a -> !Character.isDigit(a) && !Character.isAlphabetic(a)).count();
     }
 }
