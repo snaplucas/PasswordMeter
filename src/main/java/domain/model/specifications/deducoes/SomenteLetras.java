@@ -21,7 +21,7 @@ public class SomenteLetras extends Regra {
     @Override
     public double calcularPontuacao() {
         if (password.totalLetras() == password.totalCaracteres()) {
-            return password.totalNumeros();
+            return password.totalLetras();
         }
         return 0;
     }
