@@ -1,5 +1,7 @@
 package password;
 
+import domain.model.entities.Password;
+import domain.model.entities.ValidacaoPassword;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -19,8 +21,7 @@ public class PasswordTest {
 
     @Test
     public void minusculasConsecutivas() {
-
-        List<Character> list = Arrays.asList('a', 'b','c','1', '1', 'a', 'b','d','E');
+        List<Character> list = Arrays.asList('a', 'b', 'c', '1', '1', 'a', 'b', 'd', 'E');
 
         int ocorrencias = 0;
         int minusculas = -1;
@@ -36,7 +37,17 @@ public class PasswordTest {
                 ocorrencias++;
             }
         }
-
         System.out.println(ocorrencias);
+    }
+
+    @Test
+    public void pontuacaoTest() {
+        Password password = new Password("aaaA");
+
+        ValidacaoPassword validacaoPassword = new ValidacaoPassword(password);
+
+        System.out.println(validacaoPassword.pontuacaoTotal());
+        System.out.println(validacaoPassword.getRegras());
+
     }
 }

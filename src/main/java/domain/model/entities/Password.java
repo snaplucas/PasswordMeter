@@ -5,28 +5,21 @@ import java.util.stream.Collectors;
 
 public class Password {
 
-    private String texto;
-    private List<Character> caracteres;
-
     public Password(String texto) {
         this.texto = texto;
         caracteres = obterListaCaracteres();
     }
 
+    private String texto;
+
+    private List<Character> caracteres;
+
     public String getTexto() {
         return texto;
     }
 
-    public void setTexto(String texto) {
-        this.texto = texto;
-    }
-
     public List<Character> getCaracteres() {
         return caracteres;
-    }
-
-    public void setCaracteres(List<Character> caracteres) {
-        this.caracteres = caracteres;
     }
 
     public int tamanhoTexto() {

@@ -7,7 +7,7 @@ public class LetrasSequenciais implements ISpecification<Password> {
 
     @Override
     public boolean isSatisfiedBy(Password entity) {
-        return true;
+        return false;
     }
 
     @Override
