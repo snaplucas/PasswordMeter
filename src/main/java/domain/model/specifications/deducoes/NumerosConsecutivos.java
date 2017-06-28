@@ -1,26 +1,20 @@
 package domain.model.specifications.deducoes;
 
 import domain.model.entities.Password;
-import port.adapter.specification.pattern.interfaces.ISpecification;
+import domain.model.enumeradores.TipoRegra;
+import domain.model.specifications.Regra;
 
-import java.util.List;
-
-public class NumerosConsecutivos implements ISpecification<Password> {
-    @Override
-    public boolean isSatisfiedBy(Password entity) {
-        return true;
+public class NumerosConsecutivos extends Regra {
+    public NumerosConsecutivos(String descricao, TipoRegra tipoRegra, Password password) {
+        super(descricao, tipoRegra, password);
     }
 
     @Override
-    public double calcularPontuacao(Password entity) {
-        return -(ocorrencias(entity.getCaracteres()) * 2);
-    }
-
-    private double ocorrencias(List<Character> caracteres) {
+    public long obterQuantidade() {
         int ocorrencias = 0;
         int numeros = -1;
 
-        for (Character c : caracteres) {
+        for (Character c : password.getCaracteres()) {
             if (Character.isDigit(c)) {
                 numeros++;
             } else {
@@ -31,5 +25,10 @@ public class NumerosConsecutivos implements ISpecification<Password> {
             }
         }
         return ocorrencias;
+    }
+
+    @Override
+    public double calcularPontuacao() {
+        return obterQuantidade() * 2;
     }
 }

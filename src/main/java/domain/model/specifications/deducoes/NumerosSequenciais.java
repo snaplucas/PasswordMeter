@@ -1,31 +1,32 @@
 package domain.model.specifications.deducoes;
 
 import domain.model.entities.Password;
-import port.adapter.specification.pattern.interfaces.ISpecification;
+import domain.model.enumeradores.TipoRegra;
+import domain.model.specifications.Regra;
 
-public class NumerosSequenciais implements ISpecification<Password> {
+public class NumerosSequenciais extends Regra {
 
-    @Override
-    public boolean isSatisfiedBy(Password entity) {
-        return true;
+    public NumerosSequenciais(String descricao, TipoRegra tipoRegra, Password password) {
+        super(descricao, tipoRegra, password);
     }
 
     @Override
-    public double calcularPontuacao(Password entity) {
-        return -(totalNumerosSequenciais(entity.getTexto()) * 3);
-    }
-
-    private double totalNumerosSequenciais(String password) {
-        int totalNumbers = 0;
+    public long obterQuantidade() {
+        int totalNumeros = 0;
         String numbers = "0123456789";
 
         for (int i = 0; i < 8; i++) {
             String forth = numbers.substring(i, i + 3);
             String back = new StringBuffer(forth).reverse().toString();
-            if (password.toLowerCase().contains(forth) || password.toLowerCase().contains(back)) {
-                totalNumbers++;
+            if (password.getTexto().toLowerCase().contains(forth) || password.getTexto().toLowerCase().contains(back)) {
+                totalNumeros++;
             }
         }
-        return totalNumbers;
+        return totalNumeros;
+    }
+
+    @Override
+    public double calcularPontuacao() {
+        return obterQuantidade() * 3;
     }
 }

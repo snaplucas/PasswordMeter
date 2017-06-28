@@ -1,31 +1,32 @@
 package domain.model.specifications.deducoes;
 
 import domain.model.entities.Password;
-import port.adapter.specification.pattern.interfaces.ISpecification;
+import domain.model.enumeradores.TipoRegra;
+import domain.model.specifications.Regra;
 
-public class SimbolosSequenciais implements ISpecification<Password> {
+public class SimbolosSequenciais extends Regra {
 
-    @Override
-    public boolean isSatisfiedBy(Password entity) {
-        return true;
+    public SimbolosSequenciais(String descricao, TipoRegra tipoRegra, Password password) {
+        super(descricao, tipoRegra, password);
     }
 
     @Override
-    public double calcularPontuacao(Password entity) {
-        return -(totalSimbolosSequenciais(entity.getTexto()) * 3);
-    }
-
-    private double totalSimbolosSequenciais(String password) {
+    public long obterQuantidade() {
         int totalSymbols = 0;
         String symbols = ")!@#$%^&*()";
 
         for (int i = 0; i < 8; i++) {
             String forth = symbols.substring(i, i + 3);
             String back = new StringBuffer(forth).reverse().toString();
-            if (password.toLowerCase().contains(forth) || password.toLowerCase().contains(back)) {
+            if (password.getTexto().toLowerCase().contains(forth) || password.getTexto().toLowerCase().contains(back)) {
                 totalSymbols++;
             }
         }
         return totalSymbols;
+    }
+
+    @Override
+    public double calcularPontuacao() {
+        return obterQuantidade() * 3;
     }
 }

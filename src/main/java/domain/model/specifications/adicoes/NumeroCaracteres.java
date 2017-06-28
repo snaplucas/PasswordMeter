@@ -1,17 +1,22 @@
 package domain.model.specifications.adicoes;
 
 import domain.model.entities.Password;
-import port.adapter.specification.pattern.interfaces.ISpecification;
+import domain.model.enumeradores.TipoRegra;
+import domain.model.specifications.Regra;
 
-public class NumeroCaracteres implements ISpecification<Password> {
+public class NumeroCaracteres extends Regra {
 
-    @Override
-    public boolean isSatisfiedBy(Password entity) {
-        return entity.totalCaracteres() >= 8;
+    public NumeroCaracteres(String descricao, TipoRegra tipoRegra, Password password) {
+        super(descricao, tipoRegra, password);
     }
 
     @Override
-    public double calcularPontuacao(Password entity) {
-        return entity.totalCaracteres() * 4;
+    public long obterQuantidade() {
+        return password.totalCaracteres();
+    }
+
+    @Override
+    public double calcularPontuacao() {
+        return password.totalCaracteres() * 4;
     }
 }

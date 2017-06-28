@@ -1,16 +1,22 @@
 package domain.model.specifications.adicoes;
 
 import domain.model.entities.Password;
-import port.adapter.specification.pattern.interfaces.ISpecification;
+import domain.model.enumeradores.TipoRegra;
+import domain.model.specifications.Regra;
 
-public class Simbolos implements ISpecification<Password> {
-    @Override
-    public boolean isSatisfiedBy(Password entity) {
-        return entity.totalSimbolos() > 0;
+public class Simbolos extends Regra {
+
+    public Simbolos(String descricao, TipoRegra tipoRegra, Password password) {
+        super(descricao, tipoRegra, password);
     }
 
     @Override
-    public double calcularPontuacao(Password entity) {
-        return entity.totalSimbolos() * 6;
+    public long obterQuantidade() {
+        return password.totalSimbolos();
+    }
+
+    @Override
+    public double calcularPontuacao() {
+        return password.totalSimbolos() * 6;
     }
 }

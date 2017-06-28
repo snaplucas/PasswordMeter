@@ -1,16 +1,25 @@
 package domain.model.specifications.adicoes;
 
 import domain.model.entities.Password;
-import port.adapter.specification.pattern.interfaces.ISpecification;
+import domain.model.specifications.Regra;
+import domain.model.enumeradores.TipoRegra;
 
-public class LetrasMinusculas implements ISpecification<Password> {
-    @Override
-    public boolean isSatisfiedBy(Password entity) {
-        return entity.totalLetrasMinusculas() > 0;
+public class LetrasMinusculas extends Regra {
+
+    public LetrasMinusculas(String descricao, TipoRegra tipoRegra, Password password) {
+        super(descricao, tipoRegra, password);
     }
 
     @Override
-    public double calcularPontuacao(Password entity) {
-        return (entity.tamanhoTexto() - entity.totalLetrasMinusculas()) * 2;
+    public long obterQuantidade() {
+        return password.totalLetrasMinusculas();
+    }
+
+    @Override
+    public double calcularPontuacao() {
+        if (obterQuantidade() > 0) {
+            return (password.tamanhoTexto() - password.totalLetrasMinusculas()) * 2;
+        }
+        return 0;
     }
 }

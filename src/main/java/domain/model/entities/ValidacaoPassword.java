@@ -1,6 +1,9 @@
 package domain.model.entities;
 
 import domain.model.enumeradores.TipoRegra;
+import domain.model.specifications.Regra;
+import domain.model.specifications.adicoes.LetrasMaiusculas;
+import domain.model.specifications.adicoes.LetrasMinusculas;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +13,8 @@ public class ValidacaoPassword {
     public ValidacaoPassword(Password password) {
         regras = new ArrayList<>();
 
-        Regra letrasMaiusculas = new LetrasMaiusculasRegra("Letras Maiusculas", TipoRegra.ADICAO, password);
-        Regra letrasMinusculas = new LetrasMinusculasRegra("Letras Minusculas", TipoRegra.ADICAO, password);
+        Regra letrasMaiusculas = new LetrasMaiusculas("Letras Maiusculas", TipoRegra.ADICAO, password);
+        Regra letrasMinusculas = new LetrasMinusculas("Letras Minusculas", TipoRegra.ADICAO, password);
 
         regras.add(letrasMaiusculas);
         regras.add(letrasMinusculas);

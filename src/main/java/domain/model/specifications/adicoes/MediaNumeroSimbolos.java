@@ -1,25 +1,34 @@
 package domain.model.specifications.adicoes;
 
 import domain.model.entities.Password;
-import port.adapter.specification.pattern.interfaces.ISpecification;
+import domain.model.enumeradores.TipoRegra;
+import domain.model.specifications.Regra;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MediaNumeroSimbolos implements ISpecification<Password> {
+public class MediaNumeroSimbolos extends Regra {
 
-    private List<Character> characterList = new ArrayList<>();
+    private List<Character> characterList;
 
-    @Override
-    public boolean isSatisfiedBy(Password entity) {
-        characterList = entity.getCaracteres().stream().skip(0).collect(Collectors.toList());
-        characterList.remove(characterList.size());
-        return characterList.stream().filter(a -> Character.isDigit(a) || Character.isAlphabetic(a)).count() > 0;
+    public MediaNumeroSimbolos(String descricao, TipoRegra tipoRegra, Password password) {
+        super(descricao, tipoRegra, password);
+        characterList = caracteresMeio();
     }
 
     @Override
-    public double calcularPontuacao(Password entity) {
+    public long obterQuantidade() {
+        return characterList.stream().filter(a -> Character.isDigit(a) || Character.isAlphabetic(a)).count();
+    }
+
+    @Override
+    public double calcularPontuacao() {
         return characterList.stream().filter(a -> Character.isDigit(a) || Character.isAlphabetic(a)).count() * 2;
+    }
+
+    private List<Character> caracteresMeio() {
+        characterList = password.getCaracteres().stream().skip(0).collect(Collectors.toList());
+        characterList.remove(characterList.size());
+        return characterList;
     }
 }

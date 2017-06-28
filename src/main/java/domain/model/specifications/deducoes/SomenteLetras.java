@@ -1,16 +1,28 @@
 package domain.model.specifications.deducoes;
 
 import domain.model.entities.Password;
-import port.adapter.specification.pattern.interfaces.ISpecification;
+import domain.model.enumeradores.TipoRegra;
+import domain.model.specifications.Regra;
 
-public class SomenteLetras implements ISpecification<Password> {
-    @Override
-    public boolean isSatisfiedBy(Password entity) {
-        return entity.totalLetras() == entity.totalCaracteres();
+public class SomenteLetras extends Regra {
+
+    public SomenteLetras(String descricao, TipoRegra tipoRegra, Password password) {
+        super(descricao, tipoRegra, password);
     }
 
     @Override
-    public double calcularPontuacao(Password entity) {
-        return -(entity.totalLetras());
+    public long obterQuantidade() {
+        if (password.totalLetras() == password.totalCaracteres()) {
+            return password.totalNumeros();
+        }
+        return 0;
+    }
+
+    @Override
+    public double calcularPontuacao() {
+        if (password.totalLetras() == password.totalCaracteres()) {
+            return password.totalNumeros();
+        }
+        return 0;
     }
 }

@@ -1,26 +1,21 @@
 package domain.model.specifications.deducoes;
 
 import domain.model.entities.Password;
-import port.adapter.specification.pattern.interfaces.ISpecification;
+import domain.model.enumeradores.TipoRegra;
+import domain.model.specifications.Regra;
 
-import java.util.List;
+public class LetrasConsecutivasMaiusculas extends Regra {
 
-public class LetrasConsecutivasMaiusculas implements ISpecification<Password> {
-    @Override
-    public boolean isSatisfiedBy(Password entity) {
-        return true;
+    public LetrasConsecutivasMaiusculas(String descricao, TipoRegra tipoRegra, Password password) {
+        super(descricao, tipoRegra, password);
     }
 
     @Override
-    public double calcularPontuacao(Password entity) {
-        return -(ocorrencias(entity.getCaracteres()) * 2);
-    }
-
-    private double ocorrencias(List<Character> caracters) {
+    public long obterQuantidade() {
         int ocorrencias = 0;
         int maiusculas = -1;
 
-        for (Character c :caracters) {
+        for (Character c : password.getCaracteres()) {
             if (Character.isUpperCase(c)) {
                 maiusculas++;
             } else {
@@ -31,5 +26,10 @@ public class LetrasConsecutivasMaiusculas implements ISpecification<Password> {
             }
         }
         return ocorrencias;
+    }
+
+    @Override
+    public double calcularPontuacao() {
+        return obterQuantidade() * 2;
     }
 }
