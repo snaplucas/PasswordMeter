@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 public class FactoryConfiguration {
 
     @Bean
-    public IPasswordAppService getPasswordAppService() {
+    public IPasswordAppService getPasswordAppService(IPasswordService passwordService) {
         return new PasswordAppService(passwordService);
     }
 

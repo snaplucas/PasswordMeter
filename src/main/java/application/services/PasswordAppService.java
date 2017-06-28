@@ -3,6 +3,8 @@ package application.services;
 import application.dto.PasswordDto;
 import application.enumeradores.Complexidade;
 import application.interfaces.IPasswordAppService;
+import domain.model.entities.Password;
+import domain.model.entities.ValidacaoPassword;
 import domain.model.interfaces.IPasswordService;
 
 public class PasswordAppService implements IPasswordAppService {
@@ -14,12 +16,27 @@ public class PasswordAppService implements IPasswordAppService {
     }
 
     @Override
-    public PasswordDto avaliarPassword(String password) {
+    public PasswordDto avaliarPassword(String texto) {
+        Password password = new Password(texto);
+        ValidacaoPassword validacaoPassword = passwordService.avaliarPassword(password);
+        PasswordDto passwordDto = new PasswordDto();
+        passwordDto.setRegras(validacaoPassword.getRegras());
+        passwordDto.setPontuacao(limitesPontuacao(validacaoPassword.calcularPontuacaoTotal()));
+        passwordDto.setComplexidade(calcularComplexidade(passwordDto.getPontuacao()));
 
-        return new PasswordDto();
+        return passwordDto;
     }
 
-    private Complexidade calcularComplexidade(int pontuacao) {
+    private double limitesPontuacao(double pontuacao) {
+        if (pontuacao > 100) {
+            return 100;
+        } else if (pontuacao < 0) {
+            return 0;
+        }
+        return pontuacao;
+    }
+
+    private Complexidade calcularComplexidade(double pontuacao) {
         Complexidade complexidade;
         if (pontuacao < 20) {
             complexidade = Complexidade.MUITO_FRACA;

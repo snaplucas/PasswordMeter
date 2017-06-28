@@ -1,8 +1,8 @@
 package domain.model.specifications.adicoes;
 
 import domain.model.entities.Password;
-import domain.model.specifications.Regra;
 import domain.model.enumeradores.TipoRegra;
+import domain.model.specifications.Regra;
 
 public class LetrasMaiusculas extends Regra {
 
@@ -18,7 +18,7 @@ public class LetrasMaiusculas extends Regra {
 
     @Override
     public double calcularPontuacao() {
-        if (obterQuantidade() > 0) {
+        if (obterQuantidade() > 0 && password.totalCaracteres() != password.totalLetrasMaiusculas()) {
             return (password.tamanhoTexto() - password.totalLetrasMaiusculas()) * 2;
         }
         return 0;

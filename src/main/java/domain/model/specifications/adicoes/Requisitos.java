@@ -12,7 +12,8 @@ public class Requisitos extends Regra {
 
     @Override
     public long obterQuantidade() {
-        int itensRequeridos = 0;
+        int itensRequeridos;
+        itensRequeridos = +password.totalCaracteres() >= 8 ? 1 : 0;
         itensRequeridos += password.totalLetrasMaiusculas() > 0 ? 1 : 0;
         itensRequeridos += password.totalLetrasMinusculas() > 0 ? 1 : 0;
         itensRequeridos += password.totalNumeros() > 0 ? 1 : 0;

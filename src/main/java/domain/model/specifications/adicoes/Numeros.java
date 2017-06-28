@@ -17,6 +17,7 @@ public class Numeros extends Regra {
 
     @Override
     public double calcularPontuacao() {
-        return password.totalNumeros() * 4;
+        if (password.totalCaracteres() != password.totalNumeros()) return password.totalNumeros() * 4;
+        return 0;
     }
 }

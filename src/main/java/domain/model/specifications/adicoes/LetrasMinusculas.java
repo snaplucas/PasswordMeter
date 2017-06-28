@@ -17,7 +17,7 @@ public class LetrasMinusculas extends Regra {
 
     @Override
     public double calcularPontuacao() {
-        if (obterQuantidade() > 0) {
+        if (obterQuantidade() > 0 && password.totalCaracteres() != password.totalLetrasMinusculas()) {
             return (password.tamanhoTexto() - password.totalLetrasMinusculas()) * 2;
         }
         return 0;

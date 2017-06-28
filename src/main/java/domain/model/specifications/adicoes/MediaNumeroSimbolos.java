@@ -28,7 +28,8 @@ public class MediaNumeroSimbolos extends Regra {
 
     private List<Character> caracteresMeio() {
         characterList = password.getCaracteres().stream().skip(1).collect(Collectors.toList());
-        characterList.remove(characterList.size() -1);
+        if (characterList.size() > 0)
+            characterList.remove(characterList.size() - 1);
         return characterList;
     }
 }

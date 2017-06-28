@@ -7,8 +7,7 @@ import domain.model.interfaces.IPasswordService;
 public class PasswordService implements IPasswordService {
 
     @Override
-    public ValidacaoPassword avaliarPassword(String texto) {
-        Password password = new Password(texto);
+    public ValidacaoPassword avaliarPassword(Password password) {
         return new ValidacaoPassword(password);
     }
 }

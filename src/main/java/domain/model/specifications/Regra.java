@@ -14,6 +14,8 @@ public abstract class Regra {
     protected Password password;
     private String descricao;
     private TipoRegra tipoRegra;
+    private long quantidade;
+    private double pontuacao;
 
     public Password getPassword() {
         return password;
@@ -29,6 +31,14 @@ public abstract class Regra {
 
     public void setPassword(Password password) {
         this.password = password;
+    }
+
+    public long getQuantidade() {
+        return obterQuantidade();
+    }
+
+    public double getPontuacao() {
+        return calcularPontuacao();
     }
 
     public abstract long obterQuantidade();
