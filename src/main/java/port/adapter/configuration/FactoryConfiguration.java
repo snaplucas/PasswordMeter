@@ -12,7 +12,7 @@ public class FactoryConfiguration {
 
     @Bean
     public IPasswordAppService getPasswordAppService() {
-        return new PasswordAppService();
+        return new PasswordAppService(passwordService);
     }
 
     @Bean

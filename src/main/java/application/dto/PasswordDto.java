@@ -1,9 +1,13 @@
 package application.dto;
 
+import application.enumeradores.Complexidade;
+import domain.model.entities.ValidacaoPassword;
+
 public class PasswordDto {
 
     private double pontuacao;
-    private String complexidade;
+    private Complexidade complexidade;
+    private ValidacaoPassword validacaoPassword;
 
     public double getPontuacao() {
         return pontuacao;
@@ -11,13 +15,5 @@ public class PasswordDto {
 
     public void setPontuacao(double pontuacao) {
         this.pontuacao = pontuacao;
-    }
-
-    public String getComplexidade() {
-        return complexidade;
-    }
-
-    public void setComplexidade(String complexidade) {
-        this.complexidade = complexidade;
     }
 }

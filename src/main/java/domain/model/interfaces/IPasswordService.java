@@ -1,8 +1,8 @@
 package domain.model.interfaces;
 
-import domain.model.entities.Password;
+import domain.model.entities.ValidacaoPassword;
 
 public interface IPasswordService {
 
-    Password avaliarPassword(String password);
+    ValidacaoPassword avaliarPassword(String password);
 }

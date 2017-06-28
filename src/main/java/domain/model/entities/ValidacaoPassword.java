@@ -55,7 +55,7 @@ public class ValidacaoPassword {
         return regras;
     }
 
-    public double pontuacaoTotal() {
+    public double calcularPontuacaoTotal() {
         double adicoes = regras.stream()
                 .filter(a -> a.getTipoRegra() == TipoRegra.ADICAO)
                 .mapToDouble(Regra::calcularPontuacao)

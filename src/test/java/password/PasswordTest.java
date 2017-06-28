@@ -46,6 +46,6 @@ public class PasswordTest {
 
         ValidacaoPassword validacaoPassword = new ValidacaoPassword(password);
 
-        System.out.println(validacaoPassword.pontuacaoTotal());
+        System.out.println(validacaoPassword.calcularPontuacaoTotal());
     }
 }
