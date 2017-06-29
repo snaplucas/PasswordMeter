@@ -6,7 +6,8 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <title>Password Meter</title>
-    <link type="text/css" rel="stylesheet" href="stylesheets/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/style.css">
 </head>
 
 <body ng-app="password_app">
@@ -26,41 +27,55 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-6 col-xs-4 col-xs-offset-4">
+            <div class="col-lg-6 col-xs-offset-3">
                 <div class="panel panel-default">
-                    <div class="panel-body">Avaliador de segurança de senha</div>
-                    <div class="panel-footer well well-lg">
-                        <input type="{{exibirPassword ? 'text' : 'password'}}" class="form-control" placeholder="Senha" ng-change="passwordAction()"
-                               ng-model="form.password"/>
-                        <span class="label {{labelPontuacao}}"> {{passwordMetter.pontuacao}}%</span>
-                        <span class="label {{labelComplexidade}}"> {{passwordMetter.complexidade}}</span>
-                        <div class="pull-right"><input type="checkbox" ng-model="exibirPassword"> exibir senha</div>
+                    <div class="panel-body panel-header">AVALIADOR DE SEGURANÇA DE SENHA</div>
+                    <div class="panel-body-wrapper">
+                        <div class="panel-footer well well-lg">
+                            <input type="{{exibirPassword ? 'text' : 'password'}}" class="form-control" placeholder="Senha" ng-change="eventoTexto()"
+                                   ng-model="form.password"/>
+                            <span class="label {{labelPontuacao}}"> {{passwordMetter.pontuacao}}%</span>
+                            <span class="label {{labelComplexidade}}"> {{passwordMetter.complexidade}}</span>
+                            <div class="pull-right">
+                                <input type="checkbox" ng-model="exibirPassword">
+                                <span> exibir senha </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="panel panel-default">
-                <div class="panel-footer">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>Descrição</th>
-                            <th>Consequencia</th>
-                            <th>Quantidade</th>
-                            <th>Pontuação</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="regra in passwordMetter.regras">
-                            <td>{{regra.descricao}}</td>
-                            <td>{{regra.tipoRegra}}</td>
-                            <td>{{regra.quantidade}}</td>
-                            <td>{{regra.pontuacao}}</td>
-                        </tr>
-                        </tbody>
-                    </table>
+            <div class="col-lg-6 col-xs-offset-3">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <table class="table meter-table">
+                            <thead>
+                            <tr>
+                                <th>Descrição</th>
+                                <th>Consequencia</th>
+                                <th>Quantidade</th>
+                                <th>Pontuação</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="regra in passwordMetter.regras"
+                                ng-class="{'adicao': regra.tipoRegra == 'ADICAO', 'deducao': regra.tipoRegra == 'DEDUCAO',
+                                'adicao-passou': regra.tipoRegra == 'ADICAO' && regra.pontuacao > 0,
+                                'deducao-passou': regra.tipoRegra == 'DEDUCAO' && regra.pontuacao >0}">
+                                <td>{{regra.descricao}}</td>
+                                <td>{{regra.tipoRegra}}</td>
+                                <td>{{regra.quantidade}}</td>
+                                <td>
+                                    <span ng-if="regra.pontuacao != 0 && regra.tipoRegra == 'ADICAO'">+</span>
+                                    <span ng-if="regra.pontuacao != 0 && regra.tipoRegra == 'DEDUCAO'">-</span>
+                                    {{regra.pontuacao}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -74,9 +89,9 @@
 </footer>
 </body>
 
-<script type="text/javascript" rel="javascript" src="javascripts/jquery-3.1.1.min.js"></script>
-<script type="text/javascript" rel="javascript" src="javascripts/bootstrap.min.js"></script>
-<script type="text/javascript" rel="javascript" src="javascripts/angular.min.js"></script>
+<script type="text/javascript" rel="javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" rel="javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" rel="javascript" src="js/angular.min.js"></script>
 
 <script type="text/javascript" rel="javascript" src="app/password-app.js"></script>
 </html>

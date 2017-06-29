@@ -4,7 +4,7 @@ var app = angular.module('password_app', []);
 app.controller("passwordController", function($scope, $http, PasswordService) {
 	$scope.form = {};
 	$scope.passwordMetter = {}
-	$scope.passwordAction = function() {
+	$scope.eventoTexto = function() {
 		var password = $scope.form.password;
         PasswordService.postPassword(password).then(function(dados) {
             $scope.passwordMetter = dados;
@@ -12,7 +12,7 @@ app.controller("passwordController", function($scope, $http, PasswordService) {
             $scope.labelComplexidade = labelComplexidade($scope.passwordMetter.complexidade)
         });
 	}
-	$scope.passwordAction();
+	$scope.eventoTexto();
 });
 
 function labelPontuacao(pontuacao){
