@@ -6,20 +6,13 @@ app.controller("passwordController", function($scope, $http, PasswordService) {
 	$scope.passwordMetter = {}
 	$scope.passwordAction = function() {
 		var password = $scope.form.password;
-//		if (password != "" && password != null) {
-			PasswordService.postPassword(password).then(function(dados) {
-				$scope.passwordMetter = dados;
-				$scope.labelPontuacao = labelPontuacao($scope.passwordMetter.pontuacao)
-				$scope.labelComplexidade = labelComplexidade($scope.passwordMetter.complexidade)
-			});
-//		}
-//		else{
-//            $scope.labelPontuacao = labelPontuacao($scope.passwordMetter.pontuacao)
-//            $scope.labelComplexidade = labelComplexidade($scope.passwordMetter.complexidade)
-//            $scope.passwordMetter.pontuacao = 0;
-//            $scope.passwordMetter.complexidade = 'MUITO_FRACA'
-//		}
+        PasswordService.postPassword(password).then(function(dados) {
+            $scope.passwordMetter = dados;
+            $scope.labelPontuacao = labelPontuacao($scope.passwordMetter.pontuacao)
+            $scope.labelComplexidade = labelComplexidade($scope.passwordMetter.complexidade)
+        });
 	}
+	$scope.passwordAction();
 });
 
 function labelPontuacao(pontuacao){

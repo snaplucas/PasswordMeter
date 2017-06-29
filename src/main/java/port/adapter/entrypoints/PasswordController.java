@@ -23,10 +23,7 @@ public class PasswordController {
 
     @PostMapping
     public ResponseEntity<PasswordDto> avaliarPassword(@RequestBody(required = false) final String password) {
-//        if (StringUtils.isNotEmpty(password)) {
         PasswordDto passwordDto = passwordAppService.avaliarPassword(password);
         return new ResponseEntity<>(passwordDto, HttpStatus.OK);
-//        }
-//        return new ResponseEntity<>(HttpStatus.PRECONDITION_REQUIRED);
     }
 }

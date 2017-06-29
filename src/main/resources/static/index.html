@@ -12,7 +12,7 @@
 <body ng-app="password_app">
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
-        <div class="navbar-header pull-right">
+        <div class="navbar-header pull-left">
             <a class="navbar-brand" href="#">Password Meter</a>
         </div>
     </div>
@@ -30,11 +30,11 @@
                 <div class="panel panel-default">
                     <div class="panel-body">Avaliador de segurança de senha</div>
                     <div class="panel-footer well well-lg">
-                        <input class="form-control" placeholder="Senha" ng-change="passwordAction()"
+                        <input type="{{exibirPassword ? 'text' : 'password'}}" class="form-control" placeholder="Senha" ng-change="passwordAction()"
                                ng-model="form.password"/>
                         <span class="label {{labelPontuacao}}"> {{passwordMetter.pontuacao}}%</span>
                         <span class="label {{labelComplexidade}}"> {{passwordMetter.complexidade}}</span>
-                        <div class="pull-right"><input type="checkbox" ng-model="showPassword"> exibir senha</div>
+                        <div class="pull-right"><input type="checkbox" ng-model="exibirPassword"> exibir senha</div>
                     </div>
                 </div>
             </div>
@@ -47,15 +47,17 @@
                         <thead>
                         <tr>
                             <th>Descrição</th>
+                            <th>Consequencia</th>
                             <th>Quantidade</th>
                             <th>Pontuação</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="regras in passwordMetter.regras">
-                            <td>{{regras.descricao}}</td>
-                            <td>{{regras.quantidade}}</td>
-                            <td>{{regras.pontuacao}}</td>
+                        <tr ng-repeat="regra in passwordMetter.regras">
+                            <td>{{regra.descricao}}</td>
+                            <td>{{regra.tipoRegra}}</td>
+                            <td>{{regra.quantidade}}</td>
+                            <td>{{regra.pontuacao}}</td>
                         </tr>
                         </tbody>
                     </table>

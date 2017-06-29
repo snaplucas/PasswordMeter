@@ -13,7 +13,7 @@ public class SomenteLetras extends Regra {
     @Override
     public long obterQuantidade() {
         if (password.totalLetras() == password.totalCaracteres()) {
-            return password.totalNumeros();
+            return password.totalLetras();
         }
         return 0;
     }
