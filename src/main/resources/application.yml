@@ -3,6 +3,6 @@ server:
 
 spring:
   main:
-    show_banner: false
+    banner-mode: "off"
   application:
     name: passwordmeter

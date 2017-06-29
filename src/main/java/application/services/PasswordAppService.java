@@ -3,6 +3,7 @@ package application.services;
 import application.dto.PasswordDto;
 import application.enumeradores.Complexidade;
 import application.interfaces.IPasswordAppService;
+import com.google.common.base.Strings;
 import domain.model.entities.Password;
 import domain.model.entities.ValidacaoPassword;
 import domain.model.interfaces.IPasswordService;
@@ -20,9 +21,14 @@ public class PasswordAppService implements IPasswordAppService {
         Password password = new Password(texto);
         ValidacaoPassword validacaoPassword = passwordService.avaliarPassword(password);
         PasswordDto passwordDto = new PasswordDto();
-        passwordDto.setRegras(validacaoPassword.getRegras());
-        passwordDto.setPontuacao(limitesPontuacao(validacaoPassword.calcularPontuacaoTotal()));
+
+        if (!Strings.isNullOrEmpty(texto)) {
+            passwordDto.setPontuacao(limitesPontuacao(validacaoPassword.calcularPontuacaoTotal()));
+        } else {
+            passwordDto.setPontuacao(0);
+        }
         passwordDto.setComplexidade(calcularComplexidade(passwordDto.getPontuacao()));
+        passwordDto.setRegras(validacaoPassword.getRegras());
 
         return passwordDto;
     }

@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 public class Password {
 
     public Password(String texto) {
-        this.texto = texto;
+        this.texto = texto != null ? texto : "";
         caracteres = obterListaCaracteres();
     }
 
