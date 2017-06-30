@@ -6,4 +6,4 @@ spring:
     banner-mode: "off"
   application:
     name: passwordmeter
-  profiles: development
+  profiles: test
