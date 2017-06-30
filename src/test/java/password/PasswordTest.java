@@ -24,7 +24,6 @@ public class PasswordTest {
     @Autowired
     private IPasswordAppService passwordAppService;
 
-
     @Test
     public void pontuacaoTest_1() {
         Password password = new Password("aasdsq1231ascas");

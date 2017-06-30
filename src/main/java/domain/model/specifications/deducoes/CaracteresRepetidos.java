@@ -35,19 +35,20 @@ public class CaracteresRepetidos extends Regra {
     public double calcularPontuacao(Password password) {
         double pontuacao = 0;
         int quantidade = 0;
-        List<Character> list = password.getCaracteres();
+        List<Character> listaCaracteres = password.getCaracteres();
+        double tamanhoLista = listaCaracteres.size();
 
-        for (int a = 0; a < list.size(); a++) {
+        for (int a = 0; a < tamanhoLista; a++) {
             boolean caracterExiste = false;
-            for (int b = 0; b < list.size(); b++) {
-                if (list.get(a) == list.get(b) && a != b) {
+            for (int b = 0; b < tamanhoLista; b++) {
+                if (listaCaracteres.get(a) == listaCaracteres.get(b) && a != b) {
                     caracterExiste = true;
-                    pontuacao += Math.abs(list.size() / (b - a));
+                    pontuacao += Math.abs(tamanhoLista / (b - a));
                 }
             }
             if (caracterExiste) {
                 quantidade++;
-                int unicos = list.size() - quantidade;
+                double unicos = tamanhoLista - quantidade;
                 pontuacao = unicos > 0 ? Math.ceil(pontuacao / unicos) : Math.ceil(pontuacao);
             }
         }

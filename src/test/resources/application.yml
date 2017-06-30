@@ -1,9 +1,14 @@
-server:
-  port: 8888
-
 spring:
+  profiles.active: test
+
+---
+spring:
+  profiles: test
+
   main:
     banner-mode: "off"
   application:
     name: passwordmeter
-  profiles: test
+
+server:
+  port: 8888
