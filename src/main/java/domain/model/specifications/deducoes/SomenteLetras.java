@@ -6,12 +6,12 @@ import domain.model.specifications.Regra;
 
 public class SomenteLetras extends Regra {
 
-    public SomenteLetras(String descricao, TipoRegra tipoRegra, Password password) {
-        super(descricao, tipoRegra, password);
+    public SomenteLetras(String descricao, TipoRegra tipoRegra) {
+        super(descricao, tipoRegra);
     }
 
     @Override
-    public long obterQuantidade() {
+    public long obterQuantidade(Password password) {
         if (password.totalLetras() == password.totalCaracteres()) {
             return password.totalLetras();
         }
@@ -19,7 +19,7 @@ public class SomenteLetras extends Regra {
     }
 
     @Override
-    public double calcularPontuacao() {
+    public double calcularPontuacao(Password password) {
         if (password.totalLetras() == password.totalCaracteres()) {
             return password.totalLetras();
         }

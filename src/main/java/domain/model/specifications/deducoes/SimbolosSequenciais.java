@@ -6,12 +6,12 @@ import domain.model.specifications.Regra;
 
 public class SimbolosSequenciais extends Regra {
 
-    public SimbolosSequenciais(String descricao, TipoRegra tipoRegra, Password password) {
-        super(descricao, tipoRegra, password);
+    public SimbolosSequenciais(String descricao, TipoRegra tipoRegra) {
+        super(descricao, tipoRegra);
     }
 
     @Override
-    public long obterQuantidade() {
+    public long obterQuantidade(Password password) {
         int totalSymbols = 0;
         String symbols = ")!@#$%^&*()";
 
@@ -26,7 +26,7 @@ public class SimbolosSequenciais extends Regra {
     }
 
     @Override
-    public double calcularPontuacao() {
-        return obterQuantidade() * 3;
+    public double calcularPontuacao(Password password) {
+        return obterQuantidade(password) * 3;
     }
 }

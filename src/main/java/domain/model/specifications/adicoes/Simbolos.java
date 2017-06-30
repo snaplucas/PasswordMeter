@@ -6,17 +6,17 @@ import domain.model.specifications.Regra;
 
 public class Simbolos extends Regra {
 
-    public Simbolos(String descricao, TipoRegra tipoRegra, Password password) {
-        super(descricao, tipoRegra, password);
+    public Simbolos(String descricao, TipoRegra tipoRegra) {
+        super(descricao, tipoRegra);
     }
 
     @Override
-    public long obterQuantidade() {
+    public long obterQuantidade(Password password) {
         return password.totalSimbolos();
     }
 
     @Override
-    public double calcularPontuacao() {
+    public double calcularPontuacao(Password password) {
         return password.totalSimbolos() * 6;
     }
 }

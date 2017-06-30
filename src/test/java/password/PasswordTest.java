@@ -1,7 +1,5 @@
 package password;
 
-import domain.model.entities.Password;
-import domain.model.entities.ValidacaoPassword;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -41,11 +39,5 @@ public class PasswordTest {
     }
 
     @Test
-    public void pontuacaoTest() {
-        Password password = new Password("aaaA");
-
-        ValidacaoPassword validacaoPassword = new ValidacaoPassword(password);
-
-        System.out.println(validacaoPassword.calcularPontuacaoTotal());
-    }
+    public void compl
 }

@@ -1,15 +1,20 @@
 package application.services;
 
 import application.dto.PasswordDto;
+import application.dto.RegraDto;
 import application.enumeradores.Complexidade;
 import application.interfaces.IPasswordAppService;
 import domain.model.entities.Password;
-import domain.model.entities.ValidacaoPassword;
 import domain.model.interfaces.IPasswordService;
+import domain.model.specifications.Regra;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class PasswordAppService implements IPasswordAppService {
 
     private final IPasswordService passwordService;
+    private Password password;
 
     public PasswordAppService(IPasswordService passwordService) {
         this.passwordService = passwordService;
@@ -18,12 +23,12 @@ public class PasswordAppService implements IPasswordAppService {
     @Override
     public PasswordDto avaliarPassword(String texto) {
         Password password = new Password(texto);
-        ValidacaoPassword validacaoPassword = passwordService.avaliarPassword(password);
+        this.password = password;
         PasswordDto passwordDto = new PasswordDto();
 
-        passwordDto.setPontuacao(limitesPontuacao(validacaoPassword.calcularPontuacaoTotal()));
+        passwordDto.setPontuacao(limitesPontuacao(passwordService.calcularPontuacaoTotal(password)));
         passwordDto.setComplexidade(calcularComplexidade(passwordDto.getPontuacao()));
-        passwordDto.setRegras(validacaoPassword.getRegras());
+        passwordDto.setRegras(obterRegrasDto(passwordService.getRegras()));
 
         return passwordDto;
     }
@@ -51,5 +56,18 @@ public class PasswordAppService implements IPasswordAppService {
             complexidade = Complexidade.MUITO_FORTE;
         }
         return complexidade;
+    }
+
+    private List<RegraDto> obterRegrasDto(List<Regra> regras) {
+        return regras.stream().map(this::adapterRegraDto).collect(Collectors.toList());
+    }
+
+    private RegraDto adapterRegraDto(Regra regra) {
+        RegraDto regraDto = new RegraDto();
+        regraDto.setQuantidade(regra.obterQuantidade(password));
+        regraDto.setPontuacao(regra.calcularPontuacao(password));
+        regraDto.setDescricao(regra.getDescricao());
+        regraDto.setTipoRegra(regra.getTipoRegra());
+        return regraDto;
     }
 }

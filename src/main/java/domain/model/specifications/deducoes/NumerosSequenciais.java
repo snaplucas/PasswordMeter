@@ -6,12 +6,12 @@ import domain.model.specifications.Regra;
 
 public class NumerosSequenciais extends Regra {
 
-    public NumerosSequenciais(String descricao, TipoRegra tipoRegra, Password password) {
-        super(descricao, tipoRegra, password);
+    public NumerosSequenciais(String descricao, TipoRegra tipoRegra) {
+        super(descricao, tipoRegra);
     }
 
     @Override
-    public long obterQuantidade() {
+    public long obterQuantidade(Password password) {
         int totalNumeros = 0;
         String numbers = "0123456789";
 
@@ -26,7 +26,7 @@ public class NumerosSequenciais extends Regra {
     }
 
     @Override
-    public double calcularPontuacao() {
-        return obterQuantidade() * 3;
+    public double calcularPontuacao(Password password) {
+        return obterQuantidade(password) * 3;
     }
 }

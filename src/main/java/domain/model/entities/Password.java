@@ -11,7 +11,6 @@ public class Password {
     }
 
     private String texto;
-
     private List<Character> caracteres;
 
     public String getTexto() {

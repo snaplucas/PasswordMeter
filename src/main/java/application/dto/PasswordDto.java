@@ -1,8 +1,6 @@
 package application.dto;
 
 import application.enumeradores.Complexidade;
-import domain.model.entities.ValidacaoPassword;
-import domain.model.specifications.Regra;
 
 import java.util.List;
 
@@ -10,7 +8,7 @@ public class PasswordDto {
 
     private double pontuacao;
     private Complexidade complexidade;
-    private List<Regra> regras;
+    private List<RegraDto> regras;
 
     public double getPontuacao() {
         return pontuacao;
@@ -28,11 +26,11 @@ public class PasswordDto {
         this.complexidade = complexidade;
     }
 
-    public List<Regra> getRegras() {
+    public List<RegraDto> getRegras() {
         return regras;
     }
 
-    public void setRegras(List<Regra> regras) {
+    public void setRegras(List<RegraDto> regras) {
         this.regras = regras;
     }
 }

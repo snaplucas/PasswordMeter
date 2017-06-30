@@ -6,12 +6,12 @@ import domain.model.specifications.Regra;
 
 public class Requisitos extends Regra {
 
-    public Requisitos(String descricao, TipoRegra tipoRegra, Password password) {
-        super(descricao, tipoRegra, password);
+    public Requisitos(String descricao, TipoRegra tipoRegra) {
+        super(descricao, tipoRegra);
     }
 
     @Override
-    public long obterQuantidade() {
+    public long obterQuantidade(Password password) {
         int itensRequeridos;
         itensRequeridos = +password.totalCaracteres() >= 8 ? 1 : 0;
         itensRequeridos += password.totalLetrasMaiusculas() > 0 ? 1 : 0;
@@ -22,18 +22,18 @@ public class Requisitos extends Regra {
     }
 
     @Override
-    public double calcularPontuacao() {
-        int min = verificarRequisitosMinimos();
-        long quantidade = obterQuantidade();
+    public double calcularPontuacao(Password password) {
+        int min = verificarRequisitosMinimos(password.totalCaracteres());
+        long quantidade = obterQuantidade(password);
         if (quantidade > min) {
             return quantidade * 2;
         }
         return 0;
     }
 
-    private int verificarRequisitosMinimos() {
+    private int verificarRequisitosMinimos(int totalCaracteres) {
         int min;
-        if (password.totalCaracteres() >= 8) {
+        if (totalCaracteres >= 8) {
             min = 3;
         } else {
             min = 4;

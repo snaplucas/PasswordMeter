@@ -8,12 +8,12 @@ import java.util.List;
 
 public class CaracteresRepetidos extends Regra {
 
-    public CaracteresRepetidos(String descricao, TipoRegra tipoRegra, Password password) {
-        super(descricao, tipoRegra, password);
+    public CaracteresRepetidos(String descricao, TipoRegra tipoRegra) {
+        super(descricao, tipoRegra);
     }
 
     @Override
-    public long obterQuantidade() {
+    public long obterQuantidade(Password password) {
         int quantidade = 0;
         List<Character> list = password.getCaracteres();
 
@@ -32,7 +32,7 @@ public class CaracteresRepetidos extends Regra {
     }
 
     @Override
-    public double calcularPontuacao() {
+    public double calcularPontuacao(Password password) {
         double pontuacao = 0;
         int quantidade = 0;
         List<Character> list = password.getCaracteres();

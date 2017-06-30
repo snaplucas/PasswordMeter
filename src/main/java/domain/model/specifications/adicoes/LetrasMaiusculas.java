@@ -7,18 +7,18 @@ import domain.model.specifications.Regra;
 public class LetrasMaiusculas extends Regra {
 
 
-    public LetrasMaiusculas(String descricao, TipoRegra tipoRegra, Password password) {
-        super(descricao, tipoRegra, password);
+    public LetrasMaiusculas(String descricao, TipoRegra tipoRegra) {
+        super(descricao, tipoRegra);
     }
 
     @Override
-    public long obterQuantidade() {
+    public long obterQuantidade(Password password) {
         return password.totalLetrasMaiusculas();
     }
 
     @Override
-    public double calcularPontuacao() {
-        if (obterQuantidade() > 0 && password.totalCaracteres() != password.totalLetrasMaiusculas()) {
+    public double calcularPontuacao(Password password) {
+        if (obterQuantidade(password) > 0 && password.totalCaracteres() != password.totalLetrasMaiusculas()) {
             return (password.tamanhoTexto() - password.totalLetrasMaiusculas()) * 2;
         }
         return 0;

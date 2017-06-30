@@ -6,17 +6,17 @@ import domain.model.specifications.Regra;
 
 public class Numeros extends Regra {
 
-    public Numeros(String descricao, TipoRegra tipoRegra, Password password) {
-        super(descricao, tipoRegra, password);
+    public Numeros(String descricao, TipoRegra tipoRegra) {
+        super(descricao, tipoRegra);
     }
 
     @Override
-    public long obterQuantidade() {
+    public long obterQuantidade(Password password) {
         return password.totalNumeros();
     }
 
     @Override
-    public double calcularPontuacao() {
+    public double calcularPontuacao(Password password) {
         if (password.totalCaracteres() != password.totalNumeros()) return password.totalNumeros() * 4;
         return 0;
     }

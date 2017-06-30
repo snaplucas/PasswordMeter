@@ -9,27 +9,23 @@ import java.util.stream.Collectors;
 
 public class MediaNumeroSimbolos extends Regra {
 
-    private List<Character> characterList;
-
-    public MediaNumeroSimbolos(String descricao, TipoRegra tipoRegra, Password password) {
-        super(descricao, tipoRegra, password);
-        characterList = caracteresMeio();
+    public MediaNumeroSimbolos(String descricao, TipoRegra tipoRegra) {
+        super(descricao, tipoRegra);
     }
 
     @Override
-    public long obterQuantidade() {
-        return characterList.stream().filter(a -> Character.isDigit(a) || !Character.isAlphabetic(a)).count();
+    public long obterQuantidade(Password password) {
+        return caracteresMeio(password.getCaracteres()).stream().filter(a -> Character.isDigit(a) || !Character.isAlphabetic(a)).count();
     }
 
     @Override
-    public double calcularPontuacao() {
-        return characterList.stream().filter(a -> Character.isDigit(a) || !Character.isAlphabetic(a)).count() * 2;
+    public double calcularPontuacao(Password password) {
+        return caracteresMeio(password.getCaracteres()).stream().filter(a -> Character.isDigit(a) || !Character.isAlphabetic(a)).count() * 2;
     }
 
-    private List<Character> caracteresMeio() {
-        characterList = password.getCaracteres().stream().skip(1).collect(Collectors.toList());
-        if (characterList.size() > 0)
-            characterList.remove(characterList.size() - 1);
+    private List<Character> caracteresMeio(List<Character> caracteres) {
+        List<Character> characterList = caracteres.stream().skip(1).collect(Collectors.toList());
+        if (characterList.size() > 0) characterList.remove(characterList.size() - 1);
         return characterList;
     }
 }
