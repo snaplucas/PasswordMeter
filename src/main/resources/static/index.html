@@ -14,7 +14,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header pull-left">
-            <a class="navbar-brand" href="#">Password Meter</a>
+            <a class="navbar-brand" href="#">The Password Meter</a>
         </div>
     </div>
 </nav>
@@ -34,8 +34,8 @@
                         <div class="panel-footer well well-lg">
                             <input type="{{exibirPassword ? 'text' : 'password'}}" class="form-control" placeholder="Senha" ng-change="eventoTexto()"
                                    ng-model="form.password"/>
-                            <span class="label {{labelPontuacao}}"> {{passwordMetter.pontuacao}}%</span>
-                            <span class="label {{labelComplexidade}}"> {{passwordMetter.complexidade}}</span>
+                            <span class="label {{labelPontuacao}}"> {{passwordDto.pontuacao}}%</span>
+                            <span class="label {{labelComplexidade}}"> {{passwordDto.complexidade}}</span>
                             <div class="pull-right">
                                 <input type="checkbox" ng-model="exibirPassword">
                                 <span> exibir senha </span>
@@ -60,7 +60,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="regra in passwordMetter.regras"
+                            <tr ng-repeat="regra in passwordDto.regras"
                                 ng-class="{'adicao': regra.tipoRegra == 'ADICAO', 'deducao': regra.tipoRegra == 'DEDUCAO',
                                 'adicao-passou': regra.tipoRegra == 'ADICAO' && regra.pontuacao > 0,
                                 'deducao-passou': regra.tipoRegra == 'DEDUCAO' && regra.pontuacao >0}">

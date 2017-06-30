@@ -1,15 +1,15 @@
 var host_app = "http://localhost:8888";
 var app = angular.module('password_app', []);
 
-app.controller("passwordController", function($scope, $http, PasswordService) {
+app.controller("passwordController", function($scope, $http, service) {
 	$scope.form = {};
-	$scope.passwordMetter = {}
+	$scope.passwordDto = {}
 	$scope.eventoTexto = function() {
 		var password = $scope.form.password;
-        PasswordService.postPassword(password).then(function(dados) {
-            $scope.passwordMetter = dados;
-            $scope.labelPontuacao = labelPontuacao($scope.passwordMetter.pontuacao)
-            $scope.labelComplexidade = labelComplexidade($scope.passwordMetter.complexidade)
+        service.postPassword(password).then(function(dados) {
+            $scope.passwordDto = dados;
+            $scope.labelPontuacao = labelPontuacao($scope.passwordDto.pontuacao)
+            $scope.labelComplexidade = labelComplexidade($scope.passwordDto.complexidade)
         });
 	}
 	$scope.eventoTexto();
@@ -45,17 +45,17 @@ function labelComplexidade(complexidade) {
     }
 }
 
-app.service('PasswordService', function($http) {
+app.service('service', function($http) {
 	var service = {};
 	service.postPassword = function(password) {
 		return $http.post(host_app + '/password', password).then(
-				function sucesso(response) {
+				function sucesso(resposta) {
 					var dados = {}
-					if (response.status == 200) {
-						dados = response.data;
+					if (resposta.status == 200) {
+						dados = resposta.data;
 					}
 					return dados;
-				}, function erro(response) {
+				}, function erro(resposta) {
 					alert("Erro ao se comunicar com a api");
 				});
 	}
