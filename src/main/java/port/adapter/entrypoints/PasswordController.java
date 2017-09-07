@@ -2,7 +2,6 @@ package port.adapter.entrypoints;
 
 import application.dto.PasswordDto;
 import application.interfaces.IPasswordAppService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +15,6 @@ public class PasswordController {
 
     private final IPasswordAppService passwordAppService;
 
-    @Autowired
     public PasswordController(IPasswordAppService passwordAppService) {
         this.passwordAppService = passwordAppService;
     }
