@@ -1,8 +1,15 @@
 package domain.model.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Password {
 
     public Password(String texto) {
@@ -12,14 +19,6 @@ public class Password {
 
     private String texto;
     private List<Character> caracteres;
-
-    public String getTexto() {
-        return texto;
-    }
-
-    public List<Character> getCaracteres() {
-        return caracteres;
-    }
 
     public int tamanhoTexto() {
         return texto.length();
